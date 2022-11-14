@@ -2,7 +2,6 @@ import '../styles/style.css'
 import * as d3 from 'd3';
 
 //import data
-/*
 const data = [
 	{
 		naam: "Pokemon",
@@ -20,26 +19,23 @@ const data = [
 
 	}
 
-]*/
+]
 
-const data = new Array();
-d3.csv('../data/disney_plus_titles.csv', (line) => {
-	data.push(line);
-	//console.log(data);
-	changeNumber();
-	console.log(data);
-})
+// new Array();
+// d3.csv('../data/disney_plus_titles.csv', (line) => {
+// 	data.push(line);
+// })
+console.log(data);
 
 
-function changeNumber() {
-	data.map(item =>{
+const changeNumber = data.map(item =>{
 	// return {
 	// 	release_year: parseInt(item.release_year, 10)
 	// }
-	return {[{]release_year_num: Number(item.release_year) }
+	return {release_year : Number(item.release_year) }
 })
-}
 
 
+console.log(changeNumber);
 
 
