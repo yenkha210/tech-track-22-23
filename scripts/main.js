@@ -4,23 +4,17 @@ import '../styles/style.css'
 // We can use node_modules directely in the browser!
 import * as d3 from 'd3';
 
-console.log('Hello, world!');
+console.log(d3)
 
-const data = [
-	1,
-	2,
-	"3",
-	"4",
-	5
-]
+const data = new Array();
 
-function convertArrayStringsToNumbers() {
-	/* Your code here should convert the data array to an array containing only numbers and no strings and log the code to the console. */
-  let newData = data.map(item => {
-    return parseInt(item, 10);
-  })
-  
-  console.log(newData);
-}
+d3.csv('../data/disney_plus_titles.csv', (line) => {
+	data.push(line);
+})
 
-convertArrayStringsToNumbers();
+console.log(data);
+
+// fetch('https://github.com/prasertcbs/basic-dataset/commit/b9b3ea98d027ff6f29c41cbc1a8a7db79a747b44')
+//   .then((response) => response.json())
+//   .then((data) => console.log(data));
+
