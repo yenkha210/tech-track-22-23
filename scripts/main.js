@@ -31,7 +31,7 @@ const data = [
 
 let data = d3.json('../data/disneyplustitles.json')
     .then(d => data = d)
-    .then(d => doeHet(d))
+    .then(d => actueleFilms(d))
     .catch(e => console.log("dataophalenmislukt"));
 
 
@@ -42,11 +42,13 @@ function actueleFilms(data) {
 		// return alle titels van films uit het jaar 2021
 		// if release_year > dan 2020, dan return een object met de titel van de film
 		// vertaal bovenste rij naar code!!!
-		//
+		// 
 		// }
-		return {release_year : Number(item.release_year) }
+		return {release_year : Number(item.release_year),
+				title: item.title }
 	})
-	console.log(changeNumber);
+	console.log(dataFilter);
+	//console.log() de titel van de tweede film
 	// om dit allemaal te laten doen moet je doeHet(data) in de array hebben staan anders werkt het niet.
 }
 
