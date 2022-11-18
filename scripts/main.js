@@ -54,7 +54,7 @@ function actueleFilms(data) {
 
 		const filter = dataFilter
 		.filter(item => {
-			return parseInt(item.release_year) > 2016;
+			return parseInt(item.release_year) === 2021;
 		})
 		// .map(item => {
 		// 	return {
@@ -62,7 +62,22 @@ function actueleFilms(data) {
 		// 	}
 		// })
 		
+		// 61
+		// 69
+		// 65
+		// 99
+		// 114
+		// 125
+
 		console.log(filter)
+
+		 const dataset [
+		 	{
+		 		"2016": 61
+				
+		 	}
+		 ]
+		
 
 		// if(release_year > 2018){
 		// 	return{release_year: Number(item.release_year),
