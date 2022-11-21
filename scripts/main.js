@@ -1,5 +1,6 @@
 import '../styles/style.css';
 import * as d3 from 'd3';
+import gsap from "gsap";
 
 //import data
 /*
@@ -71,12 +72,28 @@ function actueleFilms(data) {
 
 		console.log(filter)
 
-		 const dataset [
+		 const dataset = [
 		 	{
 		 		"2016": 61
-				
-		 	}
-		 ]
+		 	},
+				{
+					"2017": 69
+				},
+				{
+					"2018": 65
+				},
+				{
+					"2019": 99
+				},
+				{	
+					"2020": 114
+				},
+				{
+					"2021": 125
+				},
+		 ];
+
+		
 		
 
 		// if(release_year > 2018){
@@ -87,5 +104,75 @@ function actueleFilms(data) {
 	//console.log(dataFilter[2])
 	//console.log() de titel van de tweede film
 }
+
+const dataSet = [
+	{"Jaar":2016,"Aantal":61},
+	{"Jaar":2017,"Aantal":69},
+	{"Jaar":2018,"Aantal":65},
+	{"Jaar":2019,"Aantal":99},
+	{"Jaar":2020,"Aantal":114},
+	{"Jaar":2021,"Aantal":125},];
+
+
+const chartWidth = 700
+const chartHeight = 200
+
+const xScale = d3.scaleLinear()
+	.domain([0, d3.max(dataSet, d => d.Aantal)])
+	.range([0, chartWidth]);
+
+const yScale = d3.scaleBand()
+	.domain(d3.map(dataSet, d => d.Jaar))
+	.range([0, chartHeight])
+  	.paddingInner(0.20);
+
+d3.select('#bars')
+  .selectAll('rect')
+  .data(dataSet)
+  .join('rect')
+  .attr('height', yScale.bandwidth())
+  .attr('width', d => xScale(d.Aantal))
+  .attr('y', d => yScale(d.Jaar))
+  .attr("id","bars")
+  .on("mouseover touchstart", (e, d) =>
+    d3
+      .select("#tooltip")
+      .transition()
+      .duration(175)
+      .style("opacity", 1)
+      .text(`${d.Jaar}: ${d.Aantal}`)
+  )
+  .on("mousemove", (e) =>
+    d3
+      .select("#tooltip")
+      .style("left", e.pageX + 15 + "px")
+      .style("top", e.pageY + 15 + "px")
+  )
+  .on("mouseout", e => d3.select("#tooltip").style("opacity", 0)
+  );
+  
+
+d3.select('#labels')
+  .selectAll('text')
+  .data(dataSet)
+  .join('text')
+  .style("fill", "white")
+  .attr('y', d => yScale(d.Jaar) + 15)
+  .text(d => d.Jaar)
+  ;
+
+
+
+gsap.fromTo("rect",
+{
+	opacity: 0
+
+},
+{
+	opacity: 1, 
+	duration: 1,
+	stagger: 1
+}
+)
 
 
