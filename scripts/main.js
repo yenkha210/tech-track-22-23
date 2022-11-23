@@ -33,16 +33,20 @@ const data = [
 function filterFilms(alleFilms) {
 
 	const groepjes = {
-		group_14_15: [],
-		group_16_17: []
+		group_10_15: [],
+		group_16_20: [],
+		group_21: []
+		
 	}
 
 	alleFilms.forEach(film => {
-		if (film.release_year > 2013 && film.release_year < 2016) {
-			groepjes.group_14_15.push(film)
-		} else if (film.release_year > 2015 && film.release_year < 2018) {
-			groepjes.group_16_17.push(film)
-		}
+		if (film.release_year > 2009 && film.release_year < 2016) {
+			groepjes.group_10_15.push(film)
+		} else if (film.release_year > 2015 && film.release_year < 2021) {
+			groepjes.group_16_20.push(film)
+		} else if (film.release_year > 2020 && film.release_year < 2022) {
+		groepjes.group_21.push(film)
+	}
 	})
 
 	console.log('groepjes')
