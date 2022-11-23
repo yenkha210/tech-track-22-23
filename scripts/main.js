@@ -63,19 +63,11 @@ function actueleFilms(data) {
 		// 	}
 		// })
 		
-		// 61
-		// 69
-		// 65
-		// 99
-		// 114
-		// 125
 
 		console.log(filter)
 
 		 const dataset = [
-		 	{
-		 		"2016": 61
-		 	},
+		 		
 				{
 					"2017": 69
 				},
@@ -106,7 +98,6 @@ function actueleFilms(data) {
 }
 
 const dataSet = [
-	{"Jaar":2016,"Aantal":61},
 	{"Jaar":2017,"Aantal":69},
 	{"Jaar":2018,"Aantal":65},
 	{"Jaar":2019,"Aantal":99},
@@ -145,8 +136,8 @@ d3.select('#bars')
   .on("mousemove", (e) =>
     d3
       .select("#tooltip")
-      .style("left", e.pageX + 15 + "px")
-      .style("top", e.pageY + 15 + "px")
+      .style("left", e.pageX - 180 + "px")
+      .style("top", e.pageY - 120 + "px")
   )
   .on("mouseout", e => d3.select("#tooltip").style("opacity", 0)
   );
@@ -161,12 +152,9 @@ d3.select('#labels')
   .text(d => d.Jaar)
   ;
 
-
-
 gsap.fromTo("rect",
 {
 	opacity: 0
-
 },
 {
 	opacity: 1, 
