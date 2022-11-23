@@ -23,7 +23,7 @@ svg{
 }
 .box{
   background-color: #252938;
-  height: 600px;
+  height: 2400px;
   width: 1200px;
   margin: auto;
   margin-top: 4em;
@@ -45,6 +45,7 @@ svg{
 #labels text {
   font-family: sans-serif;
   dominant-baseline: middle;
+  position: absolute;
 }
 
 #bars:hover{

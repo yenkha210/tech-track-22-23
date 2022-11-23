@@ -33,20 +33,26 @@ const data = [
 function filterFilms(alleFilms) {
 
 	const groepjes = {
+		group_0_4:[],
+		group_5_9:[],
 		group_10_15: [],
 		group_16_20: [],
 		group_21: []
-		
 	}
 
 	alleFilms.forEach(film => {
-		if (film.release_year > 2009 && film.release_year < 2016) {
+		if (film.release_year > 1999 && film.release_year < 2005) {
+			groepjes.group_0_4.push(film)
+
+		} else if (film.release_year > 2004 && film.release_year < 2010) {
+			groepjes.group_5_9.push(film)
+		} else if (film.release_year > 2009 && film.release_year < 2016) {
 			groepjes.group_10_15.push(film)
-		} else if (film.release_year > 2015 && film.release_year < 2021) {
+		}else if (film.release_year > 2015 && film.release_year < 2021) {
 			groepjes.group_16_20.push(film)
-		} else if (film.release_year > 2020 && film.release_year < 2022) {
-		groepjes.group_21.push(film)
-	}
+		}else if (film.release_year > 2020 && film.release_year < 2022) {
+			groepjes.group_21.push(film)
+		}
 	})
 
 	console.log('groepjes')
@@ -138,7 +144,7 @@ function actueleFilms(data) {
 function countMovie(outputArray) {
 	
 	const chartWidth = 700
-	const chartHeight = 1200
+	const chartHeight = 2000
 	
 	const xScale = d3.scaleLinear()
 		.domain([0, d3.max(outputArray, d => d.count)])
@@ -147,7 +153,7 @@ function countMovie(outputArray) {
 	const yScale = d3.scaleBand()
 		.domain(d3.map(outputArray, d => d.jaar))
 		.range([0, chartHeight])
-		  .paddingInner(0.20);
+		  .paddingInner(0.10);
 	
 	d3.select('#bars')
 	  .selectAll('rect')
