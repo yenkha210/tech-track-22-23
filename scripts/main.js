@@ -30,9 +30,33 @@ const data = [
 //})
 //console.log(data);
 
+function filterFilms(alleFilms) {
+
+	const groepjes = {
+		group_14_15: [],
+		group_16_17: []
+	}
+
+	alleFilms.forEach(film => {
+		if (film.release_year > 2013 && film.release_year < 2016) {
+			groepjes.group_14_15.push(film)
+		} else if (film.release_year > 2015 && film.release_year < 2018) {
+			groepjes.group_16_17.push(film)
+		}
+	})
+
+	console.log('groepjes')
+
+	console.log(groepjes);
+}
+
 let data = d3.json('../data/disneyplustitles.json')
     .then(d => data = d)
-    .then(d => actueleFilms(d))
+    .then(d => {
+		filterFilms(d);
+		actueleFilms(d)
+		return d;
+	})
     .catch(e => console.log("dataophalenmislukt"));
 
 
@@ -57,33 +81,33 @@ function actueleFilms(data) {
 		// .filter(item => {
 		// 	return parseInt(item.release_year) === 2021;
 		// })
-		// // .map(item => {
-		// // 	return {
-		// // 		title: item.title
-		// // 	}
-		// // })
+		// .map(item => {
+		// 	return {
+		// 		title: item.title
+		// 	}
+		// });
+		// console.log(filter)
 		
 
 		//console.log(filter)
 		
-		let legeObject = {}
+		const legeObject = {}
 
-		for(var film of dataFilter){
-		
-		//if that releaseyear exists
-		if(film.release_year in legeObject ){
-		
-		//up the prev count
-		legeObject[film.release_year] = legeObject[film.release_year] + 1; 
-		
-		}else{
-		legeObject[film.release_year] = 1;
-		}
+		for(const film of dataFilter){
+			//if that releaseyear exists
+			if(film.release_year in legeObject ){
+			
+			//up the prev count
+			legeObject[film.release_year] = legeObject[film.release_year] + 1; 
+			
+			}else{
+			legeObject[film.release_year] = 1;
+			}
 		}
 		console.log(legeObject)
 		//now we will iterate through those keys of the Map and format it for Array 2
 
-		let outputArray = []
+		const outputArray = []
 		Object.keys(legeObject).forEach(jaar => {
 		
 		outputArray.push({
@@ -105,6 +129,7 @@ function actueleFilms(data) {
 	//console.log() de titel van de tweede film
 }
 
+//ik wil nu dat alle release_year worden opgesplits in groepjes en dit gebeurt alleen als je op een van de filter knopjes drukt
 
 function countMovie(outputArray) {
 	
@@ -166,7 +191,6 @@ function countMovie(outputArray) {
 	// 	stagger: 1
 	// }
 	// )
-	
-	
-	
 }
+
+
