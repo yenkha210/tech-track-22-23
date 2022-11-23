@@ -53,40 +53,48 @@ function actueleFilms(data) {
 		
 		console.log(dataFilter);
 
-		const filter = dataFilter
-		.filter(item => {
-			return parseInt(item.release_year) === 2021;
-		})
-		// .map(item => {
-		// 	return {
-		// 		title: item.title
-		// 	}
+		// const filter = dataFilter
+		// .filter(item => {
+		// 	return parseInt(item.release_year) === 2021;
 		// })
+		// // .map(item => {
+		// // 	return {
+		// // 		title: item.title
+		// // 	}
+		// // })
 		
 
-		console.log(filter)
-
-		 const dataset = [
-		 		
-				{
-					"2017": 69
-				},
-				{
-					"2018": 65
-				},
-				{
-					"2019": 99
-				},
-				{	
-					"2020": 114
-				},
-				{
-					"2021": 125
-				},
-		 ];
-
+		//console.log(filter)
 		
+		let legeObject = {}
+
+		for(var film of dataFilter){
 		
+		//if that releaseyear exists
+		if(film.release_year in legeObject ){
+		
+		//up the prev count
+		legeObject[film.release_year] = legeObject[film.release_year] + 1; 
+		
+		}else{
+		legeObject[film.release_year] = 1;
+		}
+		}
+		console.log(legeObject)
+		//now we will iterate through those keys of the Map and format it for Array 2
+
+		let outputArray = []
+		Object.keys(legeObject).forEach(jaar => {
+		
+		outputArray.push({
+			jaar,
+			count: legeObject[jaar]
+		})
+		})
+
+		console.log(outputArray)
+		
+		countMovie(outputArray)
 
 		// if(release_year > 2018){
 		// 	return{release_year: Number(item.release_year),
@@ -97,70 +105,68 @@ function actueleFilms(data) {
 	//console.log() de titel van de tweede film
 }
 
-const dataSet = [
-	{"Jaar":2017,"Aantal":69},
-	{"Jaar":2018,"Aantal":65},
-	{"Jaar":2019,"Aantal":99},
-	{"Jaar":2020,"Aantal":114},
-	{"Jaar":2021,"Aantal":125},];
 
+function countMovie(outputArray) {
+	
+	const chartWidth = 700
+	const chartHeight = 1200
+	
+	const xScale = d3.scaleLinear()
+		.domain([0, d3.max(outputArray, d => d.count)])
+		.range([0, chartWidth]);
+	
+	const yScale = d3.scaleBand()
+		.domain(d3.map(outputArray, d => d.jaar))
+		.range([0, chartHeight])
+		  .paddingInner(0.20);
+	
+	d3.select('#bars')
+	  .selectAll('rect')
+	  .data(outputArray)
+	  .join('rect')
+	  .attr('height', yScale.bandwidth())
+	  .attr('width', d => xScale(d.count))
+	  .attr('y', d => yScale(d.jaar))
+	  .attr("id","bars")
+	  .on("mouseover touchstart", (e, d) =>
+		d3
+		  .select("#tooltip")
+		  .transition()
+		  .duration(175)
+		  .style("opacity", 1)
+		  .text(`${d.jaar}: ${d.count}`)
+	  )
+	  .on("mousemove", (e) =>
+		d3
+		  .select("#tooltip")
+		  .style("left", e.pageX - 170 + "px")
+		  .style("top", e.pageY - 120 + "px")
+	  )
+	  .on("mouseout", e => d3.select("#tooltip").style("opacity", 0)
+	  );
+	  
+	
+	d3.select('#labels')
+	  .selectAll('text')
+	  .data(outputArray)
+	  .join('text')
+	  .style("fill", "white")
+	  .attr('y', d => yScale(d.jaar) + 15)
+	  .text(d => d.jaar)
+	  ;
+	
 
-const chartWidth = 700
-const chartHeight = 200
-
-const xScale = d3.scaleLinear()
-	.domain([0, d3.max(dataSet, d => d.Aantal)])
-	.range([0, chartWidth]);
-
-const yScale = d3.scaleBand()
-	.domain(d3.map(dataSet, d => d.Jaar))
-	.range([0, chartHeight])
-  	.paddingInner(0.20);
-
-d3.select('#bars')
-  .selectAll('rect')
-  .data(dataSet)
-  .join('rect')
-  .attr('height', yScale.bandwidth())
-  .attr('width', d => xScale(d.Aantal))
-  .attr('y', d => yScale(d.Jaar))
-  .attr("id","bars")
-  .on("mouseover touchstart", (e, d) =>
-    d3
-      .select("#tooltip")
-      .transition()
-      .duration(175)
-      .style("opacity", 1)
-      .text(`${d.Jaar}: ${d.Aantal}`)
-  )
-  .on("mousemove", (e) =>
-    d3
-      .select("#tooltip")
-      .style("left", e.pageX - 180 + "px")
-      .style("top", e.pageY - 120 + "px")
-  )
-  .on("mouseout", e => d3.select("#tooltip").style("opacity", 0)
-  );
-  
-
-d3.select('#labels')
-  .selectAll('text')
-  .data(dataSet)
-  .join('text')
-  .style("fill", "white")
-  .attr('y', d => yScale(d.Jaar) + 15)
-  .text(d => d.Jaar)
-  ;
-
-gsap.fromTo("rect",
-{
-	opacity: 0
-},
-{
-	opacity: 1, 
-	duration: 1,
-	stagger: 1
+	// gsap.fromTo("rect",
+	// {
+	// 	opacity: 0
+	// },
+	// {
+	// 	opacity: 1, 
+	// 	duration: 1,
+	// 	stagger: 1
+	// }
+	// )
+	
+	
+	
 }
-)
-
-
