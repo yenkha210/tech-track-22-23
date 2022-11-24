@@ -33,25 +33,52 @@ const data = [
 function filterFilms(alleFilms) {
 
 	const groepjes = {
-		group_0_4:[],
-		group_5_9:[],
-		group_10_15: [],
-		group_16_20: [],
-		group_21: []
+		group_1920_1929:[],
+		group_1930_1939:[],
+		group_1940_1949: [],
+		group_1950_1959: [],
+		group_1960_1969: [],
+		group_1970_1979: [],
+		group_1980_1989: [],
+		group_1990_1999: [],
+		group_2000_2009: [],
+		group_2010_2019: [],
+		group_2020_2022: []
 	}
 
 	alleFilms.forEach(film => {
-		if (film.release_year > 1999 && film.release_year < 2005) {
-			groepjes.group_0_4.push(film)
+		if (film.release_year > 1919 && film.release_year < 1930) {
+			groepjes.group_1920_1929.push(film)
 
-		} else if (film.release_year > 2004 && film.release_year < 2010) {
-			groepjes.group_5_9.push(film)
-		} else if (film.release_year > 2009 && film.release_year < 2016) {
-			groepjes.group_10_15.push(film)
-		}else if (film.release_year > 2015 && film.release_year < 2021) {
-			groepjes.group_16_20.push(film)
-		}else if (film.release_year > 2020 && film.release_year < 2022) {
-			groepjes.group_21.push(film)
+		} else if (film.release_year > 1929 && film.release_year < 1940) {
+			groepjes.group_1930_1939.push(film)
+
+		} else if (film.release_year > 1939 && film.release_year < 1950) {
+			groepjes.group_1940_1949.push(film)
+			
+		}else if (film.release_year > 1949 && film.release_year < 1960) {
+			groepjes.group_1950_1959.push(film)
+
+		}else if (film.release_year > 1959 && film.release_year < 1970) {
+			groepjes.group_1960_1969.push(film)
+
+		}else if (film.release_year > 1969 && film.release_year < 1980) {
+			groepjes.group_1970_1979.push(film)
+
+		}else if (film.release_year > 1979 && film.release_year < 1990) {
+			groepjes.group_1980_1989.push(film)
+
+		}else if (film.release_year > 1989 && film.release_year < 2000) {
+			groepjes.group_1990_1999.push(film)
+
+		}else if (film.release_year > 1999 && film.release_year < 2009) {
+			groepjes.group_2000_2009.push(film)
+
+		}else if (film.release_year > 2009 && film.release_year < 2019) {
+			groepjes.group_2010_2019.push(film)
+
+		}else if (film.release_year > 2019 && film.release_year < 2022) {
+			groepjes.group_2020_2022.push(film)
 		}
 	})
 
@@ -59,6 +86,10 @@ function filterFilms(alleFilms) {
 
 	console.log(groepjes);
 }
+
+
+//ik wil nu dat alle release_year worden opgesplits in groepjes en dit gebeurt alleen als je op een van de filter knopjes drukt
+
 
 let data = d3.json('../data/disneyplustitles.json')
     .then(d => data = d)
@@ -139,7 +170,6 @@ function actueleFilms(data) {
 	//console.log() de titel van de tweede film
 }
 
-//ik wil nu dat alle release_year worden opgesplits in groepjes en dit gebeurt alleen als je op een van de filter knopjes drukt
 
 function countMovie(outputArray) {
 	
@@ -190,7 +220,6 @@ function countMovie(outputArray) {
 	  .text(d => d.jaar)
 	  ;
 	
-
 	// gsap.fromTo("rect",
 	// {
 	// 	opacity: 0
