@@ -30,21 +30,21 @@ const data = [
 //})
 //console.log(data);
 
-function filterFilms(alleFilms) {
+const groepjes = {
+	group_1920_1929:[],
+	group_1930_1939:[],
+	group_1940_1949: [],
+	group_1950_1959: [],
+	group_1960_1969: [],
+	group_1970_1979: [],
+	group_1980_1989: [],
+	group_1990_1999: [],
+	group_2000_2009: [],
+	group_2010_2019: [],
+	group_2020_2022: []
+}
 
-	const groepjes = {
-		group_1920_1929:[],
-		group_1930_1939:[],
-		group_1940_1949: [],
-		group_1950_1959: [],
-		group_1960_1969: [],
-		group_1970_1979: [],
-		group_1980_1989: [],
-		group_1990_1999: [],
-		group_2000_2009: [],
-		group_2010_2019: [],
-		group_2020_2022: []
-	}
+function filterFilms(alleFilms) {
 
 	alleFilms.forEach(film => {
 		if (film.release_year > 1919 && film.release_year < 1930) {
@@ -86,9 +86,6 @@ function filterFilms(alleFilms) {
 
 	console.log(groepjes);
 }
-
-
-//ik wil nu dat alle release_year worden opgesplits in groepjes en dit gebeurt alleen als je op een van de filter knopjes drukt
 
 
 let data = d3.json('../data/disneyplustitles.json')
@@ -219,7 +216,7 @@ function countMovie(outputArray) {
 	  .attr('y', d => yScale(d.jaar) + 15)
 	  .text(d => d.jaar)
 	  ;
-	
+
 	// gsap.fromTo("rect",
 	// {
 	// 	opacity: 0
@@ -233,3 +230,18 @@ function countMovie(outputArray) {
 }
 
 
+function updateChart(countMovie){
+	countMovie = Number(countMovie);
+	const dataSet = a  (countMovie);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+	const buttons = document.querySelectorAll('button');
+	buttons.forEach(button => {
+		button.addEventListener('click', handleClick)
+	})
+})
+
+function handleClick(event) {
+	console.log(groepjes[event.target.value]);
+}
