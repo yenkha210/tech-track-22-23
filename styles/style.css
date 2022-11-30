@@ -23,6 +23,22 @@ svg{
   top: 300px;
   left: 100px;
 }
+
+button{
+  font-family:"avenir";
+  border: none;
+  border-radius: 0.3em;
+  height: 3em;
+  width: 4.5em;
+}
+
+
+button:hover{
+  background-color: lightcoral;
+  color: #252938;
+  transition: 1ms ease;
+}
+
 .box{
   background-color: #252938;
   height: 2400px;
@@ -46,12 +62,6 @@ svg{
   max-width: 200px;
 }
 
-#button{
-  border: none;
-  border-radius: .3em;
-  height: 3em;
-  width: 4.5em;
-}
 
 #bars{
   fill: white;
@@ -65,6 +75,7 @@ svg{
 
 #bars:hover{
     fill: blue;
+    transition: 50ms ease;
 }
 
 #tooltip {

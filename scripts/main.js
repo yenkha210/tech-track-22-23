@@ -31,8 +31,8 @@ const data = [
 //console.log(data);
 
 const groepjes = {
-	group_1920_1929:[],
-	group_1930_1939:[],
+	group_1920_1929: [],
+	group_1930_1939: [],
 	group_1940_1949: [],
 	group_1950_1959: [],
 	group_1960_1969: [],
@@ -223,7 +223,7 @@ function countMovie(outputArray) {
 	// },
 	// {
 	// 	opacity: 1, 
-	// 	duration: 1,
+	// 	duration: 0,
 	// 	stagger: 1
 	// }
 	// )
@@ -238,10 +238,13 @@ function updateChart(countMovie){
 window.addEventListener('DOMContentLoaded', () => {
 	const buttons = document.querySelectorAll('button');
 	buttons.forEach(button => {
-		button.addEventListener('click', handleClick)
+		button.addEventListener('click', handleClick);
 	})
 })
 
 function handleClick(event) {
 	console.log(groepjes[event.target.value]);
 }
+
+
+
