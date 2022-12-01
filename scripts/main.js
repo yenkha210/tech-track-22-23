@@ -2,33 +2,15 @@ import '../styles/style.css';
 import * as d3 from 'd3';
 import gsap from "gsap";
 
-//import data
-/*
-const data = [
-	{
-		naam: "Pokemon",
-		release_year: "1999"
+let data = d3.json('../data/disneyplustitles.json')
+    .then(d => data = d)
+    .then(d => {
+		filterFilms(d);
+		actueleFilms(d)
+		return d;
+	})
+    .catch(e => console.log("dataophalenmislukt"));
 
-	},
-	{
-		naam: "Pokemon",
-		release_year: "2005"
-
-	},
-	{
-		naam: "Pokemon",
-		release_year: "2012"
-
-	}
-
-]*/
-
-//const data = new Array();
-//d3.csv('../data/disney_plus_titles.csv', (line) => {
-	//data.push(line);
-	//doeHet(data);
-//})
-//console.log(data);
 
 const groepjes = {
 	group_1920_1929: [],
@@ -82,29 +64,13 @@ function filterFilms(alleFilms) {
 		}
 	})
 
-	console.log('groepjes')
 
 	console.log(groepjes);
 }
 
 
-let data = d3.json('../data/disneyplustitles.json')
-    .then(d => data = d)
-    .then(d => {
-		filterFilms(d);
-		actueleFilms(d)
-		return d;
-	})
-    .catch(e => console.log("dataophalenmislukt"));
-
-
 function actueleFilms(data) {
 	const dataFilter = data.map(item =>{ // Met .map kan je ieder item uit de array aanpassen
-		// return {
-		// 	release_year: parseInt(item.release_year, 10)
-		// return alle titels van films uit het jaar 2021
-		// if release_year > 2018, dan return een object met de titel van de film
-		// vertaal bovenste rij naar code!!!
 		
 		return {
 			release_year : Number(item.release_year),
@@ -115,27 +81,14 @@ function actueleFilms(data) {
 		
 		console.log(dataFilter);
 
-		// const filter = dataFilter
-		// .filter(item => {
-		// 	return parseInt(item.release_year) === 2021;
-		// })
-		// .map(item => {
-		// 	return {
-		// 		title: item.title
-		// 	}
-		// });
-		// console.log(filter)
-		
-
-		//console.log(filter)
 		
 		const legeObject = {}
 
 		for(const film of dataFilter){
-			//if that releaseyear exists
+			
 			if(film.release_year in legeObject ){
 			
-			//up the prev count
+			
 			legeObject[film.release_year] = legeObject[film.release_year] + 1; 
 			
 			}else{
@@ -143,7 +96,6 @@ function actueleFilms(data) {
 			}
 		}
 		console.log(legeObject)
-		//now we will iterate through those keys of the Map and format it for Array 2
 
 		const outputArray = []
 		Object.keys(legeObject).forEach(jaar => {
@@ -158,13 +110,6 @@ function actueleFilms(data) {
 		
 		countMovie(outputArray)
 
-		// if(release_year > 2018){
-		// 	return{release_year: Number(item.release_year),
-		// 			title: item.title}
-		// };
-
-	//console.log(dataFilter[2])
-	//console.log() de titel van de tweede film
 }
 
 
@@ -222,7 +167,6 @@ function countMovie(groepjes) {
 	d3.select('#bars')
 	  .selectAll('rect')
 	  .data(newData)
-	  //.join('rect')
 	  .join(
 		function(enter) {
 			return enter.append("rect")
@@ -277,21 +221,6 @@ function countMovie(groepjes) {
 }
 
 
-function updateChart(countMovie){
-	countMovie = Number(countMovie);
-	const dataSet = a  (countMovie);
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-	const buttons = document.querySelectorAll('button');
-	buttons.forEach(button => {
-		button.addEventListener('click', handleClick);
-	})
-})
-
-function handleClick(event) {
-	console.log(groepjes[event.target.value]);
-}
 
 
 
