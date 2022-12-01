@@ -168,31 +168,73 @@ function actueleFilms(data) {
 }
 
 
-function countMovie(outputArray) {
+function countMovie(groepjes) {
 	
 	const chartWidth = 700
 	const chartHeight = 2000
 	
 	const xScale = d3.scaleLinear()
-		.domain([0, d3.max(outputArray, d => d.count)])
+		.domain([0, d3.max(groepjes, d => d.count)])
 		.range([0, chartWidth]);
 	
 	const yScale = d3.scaleBand()
-		.domain(d3.map(outputArray, d => d.jaar))
+		.domain(d3.map(groepjes, d => d.jaar))
 		.range([0, chartHeight])
 		  .paddingInner(0.10);
 	
 
-	function update(){
-		
-	}
-
-
+		  function update(groepjes, buttonPressed, whichBtn) {
+            let newData;
+            if (buttonPressed) {
+              if (whichBtn == "group_1920_1929") {
+                newData = groepjes.filter(d => d.jaar > 1919 && d.jaar < 1930);
+              } else if (whichBtn == "group_1930_1939") {
+                newData = groepjes.filter(d => d.jaar > 1929 && d.jaar < 1940);
+              } else if (whichBtn == "group_1940_1949") {
+                newData = groepjes.filter(d => d.jaar > 1939 && d.jaar < 1950);
+			  } else if (whichBtn == "group_1950_1959") {
+                newData = groepjes.filter(d => d.jaar > 1949 && d.jaar < 1960);
+              } else if (whichBtn == "group_1960_1969") {
+                newData = groepjes.filter(d => d.jaar > 1959 && d.jaar < 1970);
+			  } else if (whichBtn == "group_1970_1979") {
+                newData = groepjes.filter(d => d.jaar > 1969 && d.jaar < 1980);
+              } else if (whichBtn == "group_1980_1989") {
+                newData = groepjes.filter(d => d.jaar > 1979 && d.jaar < 1990);
+			  } else if (whichBtn == "group_1990_1999") {
+                newData = groepjes.filter(d => d.jaar > 1989 && d.jaar < 2000);
+              } else if (whichBtn == "group_2000_2009") {
+                newData = groepjes.filter(d => d.jaar > 1999 && d.jaar < 2010);
+			  } else if (whichBtn == "group_2010_2019") {
+                newData = groepjes.filter(d => d.jaar > 2009 && d.jaar < 2020);
+			 } else if (whichBtn == "group_2020_2022") {
+                newData = groepjes.filter(d => d.jaar > 2019 && d.jaar < 2022);
+				
+              }
+              else {
+                newData = groepjes.filter(d => d);
+              }
+            } else {
+              newData = groepjes;
+            }
+            console.log(newData)
+	  
 
 	d3.select('#bars')
 	  .selectAll('rect')
-	  .data(outputArray)
-	  .join('rect')
+	  .data(newData)
+	  //.join('rect')
+	  .join(
+		function(enter) {
+			return enter.append("rect")
+			.style("opacity", 0);
+		},
+		function(update) {
+			return update.style("opacity", 1);
+		},
+		function(exit) {
+			return exit.remove();
+		}
+	)
 	  .attr('height', yScale.bandwidth())
 	  .attr('width', d => xScale(d.count))
 	  .attr('y', d => yScale(d.jaar))
@@ -217,12 +259,21 @@ function countMovie(outputArray) {
 	
 	d3.select('#labels')
 	  .selectAll('text')
-	  .data(outputArray)
+	  .data(groepjes)
 	  .join('text')
 	  .style("fill", "white")
 	  .attr('y', d => yScale(d.jaar) + 15)
 	  .text(d => d.jaar);
+	}
 
+	update(groepjes);
+        d3.selectAll("button")
+
+        .on("click", e => {
+
+            update(groepjes, true, e.target.value);
+
+        });
 }
 
 
