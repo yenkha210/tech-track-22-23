@@ -92,7 +92,6 @@ button:hover{
 .scroll-div{
   width: 1200px;
   height: 2400px;
-  background: blue;
   overflow: hidden;
   overflow-y: scroll;
 }
