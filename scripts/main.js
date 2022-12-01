@@ -182,6 +182,13 @@ function countMovie(outputArray) {
 		.range([0, chartHeight])
 		  .paddingInner(0.10);
 	
+
+	function update(){
+		
+	}
+
+
+
 	d3.select('#bars')
 	  .selectAll('rect')
 	  .data(outputArray)
@@ -214,19 +221,8 @@ function countMovie(outputArray) {
 	  .join('text')
 	  .style("fill", "white")
 	  .attr('y', d => yScale(d.jaar) + 15)
-	  .text(d => d.jaar)
-	  ;
+	  .text(d => d.jaar);
 
-	// gsap.fromTo("rect",
-	// {
-	// 	opacity: 0
-	// },
-	// {
-	// 	opacity: 1, 
-	// 	duration: 0,
-	// 	stagger: 1
-	// }
-	// )
 }
 
 
